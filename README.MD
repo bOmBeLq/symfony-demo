@@ -50,3 +50,4 @@ To run tests simply run
 1. Add more tests (see makrTestIncomplete in test files)
 1. Add registration
 1. Add some more complicated functionalities to show usage of services DI and maybe some unit tests.
+1. Separate DB for tests
