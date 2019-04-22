@@ -5,4 +5,4 @@ else
     TO_EXEC=$@;
 fi
 
-docker exec -it -u `whoami` symfony-demo-php ${TO_EXEC}
+docker exec -it -u symfony-demo symfony-demo-php ${TO_EXEC}

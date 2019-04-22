@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if news.id %}
+        Edit news
+    {% else %}
+        Create new news
+    {% endif %}
+{% endblock %}
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <h1 class="mb-0">
+                {% if news.id %}
+                    Edit news
+                {% else %}
+                    Create new news
+                {% endif %}
+            </h1>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">{{ news.id ? 'Update' : 'Create' }}</button>
+            <a href="{{ path('app_index') }}" class="btn btn-secondary">
+                Back to news list
+            </a>
+            {{ form_end(form) }}
+            {% if news.id %}
+                {{ include('news/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

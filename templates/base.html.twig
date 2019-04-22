@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block head %}{% endblock %}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<header class="bg-dark main-header mb-3">
+    <div class="container">
+        <div class="row pt-2 pb-2">
+            <div class="col">
+                <h1 class="mb-0">
+                    <a href="{{ path('app_index') }}" class="text-secondary">
+                        Symfony demo app
+                    </a>
+                </h1>
+            </div>
+            <aside class="col-auto text-secondary">
+                {% if app.user %}
+                    Logged as
+                    <span class="text-success font-weight-bold">
+                        {{ app.user }}
+                    </span> |
+                    <a href="{{ path('app_news_my') }}" class="btn btn-primary btn-sm">Dashboard</a>
+
+                    <a href="{{ path('app_logout') }}" class="btn btn-secondary btn-sm">Logout</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-primary btn-sm">Login</a>
+                {% endif %}
+            </aside>
+        </div>
+    </div>
+</header>
+<div class="container">
+
+    {% block body %}{% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</div>
+</body>
 </html>

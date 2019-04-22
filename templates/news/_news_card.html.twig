@@ -1,0 +1,32 @@
+<section class="card news mb-4">
+    <header class="card-header">
+        <div class="row">
+            <h1 class="col mb-0">
+                <a href="{{ path('app_news_show', {id: news.id}) }}">
+                    {{ news.title }}
+                </a>
+            </h1>
+            {% if news.createdBy == app.user %}
+                <aside class="col-auto card-actions">
+                    <a href="{{ path('app_news_edit', {id: news.id}) }}" class="btn btn-primary btn-sm">
+                        Edit
+                    </a>
+                </aside>
+            {% endif %}
+        </div>
+    </header>
+    <div class="card-body">{{ news.content | nl2br }}</div>
+    <footer class="card-footer">
+        <div class="row">
+            <div class="col" title="Created by">
+                {{ news.createdBy }}
+            </div>
+            <div class="col text-right" title="Created at">
+                {{ news.createdAt | date('Y-m-d H:i') }}
+                {% if news.updatedAt != news.createdAt %}
+                    (updated {{ news.updatedAt | date('Y-m-d H:i') }})
+                {% endif %}
+            </div>
+        </div>
+    </footer>
+</section>

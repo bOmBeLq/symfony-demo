@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+    <h1>News details</h1>
+    {% include 'news/_news_card.html.twig' %}
+    <section class="card news-comments">
+        <header class="card-header">
+            <h1 class="mb-0">
+                Comments ({{ news.comments.count }})
+            </h1>
+        </header>
+        <div class="card-body border-bottom">
+            {{ form_start(commentForm) }}
+            {{ form_widget(commentForm) }}
+            <button class="btn btn-primary">Add comment</button>
+            {{ form_end(commentForm) }}
+        </div>
+        {% for comment in news.comments %}
+            <div class="card-body border-bottom">
+                <div class="row">
+                    <strong class="col mb-0">
+                        {{ comment.author }}
+                    </strong>
+                    <small class="col-auto card-actions">
+                        {{ comment.createdAt | date }}
+                        {% if comment.updatedAt != comment.createdAt %}
+                            (updated {{ comment.updatedAt | date('Y-m-d H:i') }})
+                        {% endif %}
+                    </small>
+                </div>
+                <div>{{ comment.content | nl2br }}</div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

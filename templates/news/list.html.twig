@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mb-3">
+        <h1 class="col">
+            Showing {{ newsList | length }} news
+            {% if belongingTo is defined %}
+                belonging to {{ app.user }}
+            {% endif %}
+        </h1>
+        {% if app.user %}
+            <div class="col-auto">
+                <a href="{{ path('app_news_new') }}" class="btn btn-primary btn-sm">
+                    Add news
+                </a>
+            </div>
+        {% endif %}
+    </div>
+    {% for news in newsList %}
+        {% include 'news/_news_card.html.twig' %}
+    {% endfor %}
+{% endblock %}
